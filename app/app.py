@@ -39,7 +39,7 @@ INDICATOR_OPTIONS = [
     "VL_FOB",
 ]
 
-OPERATION_OPTIONS_REVERSER = {"importação": "import", "exportação":"export"}
+OPERATION_OPTIONS_REVERSER = {"import": "importação", "export":"exportação"}
 
 DELIMITER = ";"
 
