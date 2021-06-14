@@ -55,11 +55,16 @@ TARGET_DATA_HEADER = [
 ]
 DELIMITER = ";"
 ENCODING = "utf-8"
+
 # zeros a adicionar no final destas colunas
 SIZE_COD_NCM = 8
 SIZE_COD_PAIS = 3
 SIZE_COD_URF = 7
 SIZE_COD_SH4 = 4
+
+# cria o diretório que armarzena os dados
+if not os.path.exists(DOWNLOAD_PATH):
+     os.makedirs(DOWNLOAD_PATH)
 
 DownloadLinks = namedtuple("DownloadLinks", ["type", "year", "url"])
 

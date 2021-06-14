@@ -13,7 +13,7 @@ COPY . ./
 RUN pip install -r requirements.txt
 
 # faz o scraping dos dados que são servidos na API
-RUN python data_extraction.py
+RUN python app/data_extraction.py
 
 # Executa o servidor web
 CMD exec gunicorn --bind :$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker  --threads 8 app.app:main
