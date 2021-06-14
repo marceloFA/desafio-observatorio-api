@@ -38,6 +38,9 @@ INDICATOR_OPTIONS = [
     "VL_PESO_KG",
     "VL_FOB",
 ]
+
+OPERATION_OPTIONS_REVERSER = {"importação": "import", "exportação":"export"}
+
 DELIMITER = ";"
 
 main = FastAPI()
@@ -73,7 +76,7 @@ def get_operation_statistics(year: int, operation: str, cod_ncm: int):
 
     filters = (
         (dataset["ANO"] == year)
-        & (dataset["MOVIMENTACAO"] == operation)
+        & (dataset["MOVIMENTACAO"] == OPERATION_OPTIONS_REVERSER[operation])
         & (dataset["COD_NCM"] == cod_ncm)
     )
 
@@ -89,7 +92,7 @@ def get_via_statistics(year: int, operation: str, cod_ncm: int):
 
     filters = (
         (dataset["ANO"] == year)
-        & (dataset["MOVIMENTACAO"] == operation)
+        & (dataset["MOVIMENTACAO"] == OPERATION_OPTIONS_REVERSER[operation])
         & (dataset["COD_NCM"] == cod_ncm)
     )
 

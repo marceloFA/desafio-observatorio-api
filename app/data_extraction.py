@@ -50,7 +50,7 @@ TARGET_DATA_HEADER = [
     "SG_UF",
     "COD_VIA",
     "COD_URF",
-    " VL_QUANTIDADE",
+    "VL_QUANTIDADE",
     "VL_PESO_KG",
     "VL_FOB",
 ]
