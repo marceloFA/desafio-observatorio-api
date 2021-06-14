@@ -39,7 +39,7 @@ INDICATOR_OPTIONS = [
     "VL_FOB",
 ]
 
-OPERATION_OPTIONS_REVERSER = {"importação": "import", "exportação":"export"}
+OPERATION_OPTIONS_REVERSER = {"import": "importação", "export":"exportação"}
 
 DELIMITER = ";"
 
@@ -62,6 +62,13 @@ dataset = pd.read_csv(file_path, delimiter=DELIMITER)
 @main.get("/")
 def home():
     return RedirectResponse(url="/docs/")
+
+
+@main.get("/year_listing/")
+def year_listing():
+    """Listagem dos anos com dados disponíveis """
+    years = dataset["ANO"].unique().tolist()
+    return sorted(years, reveresed=True)
 
 
 @main.get("/cod_ncm_listing/")
