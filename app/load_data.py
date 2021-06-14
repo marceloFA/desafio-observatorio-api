@@ -9,7 +9,7 @@ db = SessionLocal()
 
 models.Base.metadata.create_all(bind=engine)
 
-with open('data/f_comex.csv', "r") as f:
+with open("data/f_comex.csv", "r") as f:
     csv_reader = csv.DictReader(f)
 
     for row in csv_reader:

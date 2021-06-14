@@ -4,33 +4,33 @@ from starlette.responses import RedirectResponse
 import pandas as pd
 
 STATES = {
-    'AC': 'Acre',
-    'AL': 'Alagoas',
-    'AP': 'Amapá',
-    'AM': 'Amazonas',
-    'BA': 'Bahia',
-    'CE': 'Ceará',
-    'DF': 'Distrito Federal',
-    'ES': 'Espírito Santo',
-    'GO': 'Goiás',
-    'MA': 'Maranhão',
-    'MT': 'Mato Grosso',
-    'MS': 'Mato Grosso do Sul',
-    'MG': 'Minas Gerais',
-    'PA': 'Pará',
-    'PB': 'Paraíba',
-    'PR': 'Paraná',
-    'PE': 'Pernambuco',
-    'PI': 'Piauí',
-    'RJ': 'Rio de Janeiro',
-    'RN': 'Rio Grande do Norte',
-    'RS': 'Rio Grande do Sul',
-    'RO': 'Rondônia',
-    'RR': 'Roraima',
-    'SC': 'Santa Catarina',
-    'SP': 'São Paulo',
-    'SE': 'Sergipe',
-    'TO': 'Tocantins'
+    "AC": "Acre",
+    "AL": "Alagoas",
+    "AP": "Amapá",
+    "AM": "Amazonas",
+    "BA": "Bahia",
+    "CE": "Ceará",
+    "DF": "Distrito Federal",
+    "ES": "Espírito Santo",
+    "GO": "Goiás",
+    "MA": "Maranhão",
+    "MT": "Mato Grosso",
+    "MS": "Mato Grosso do Sul",
+    "MG": "Minas Gerais",
+    "PA": "Pará",
+    "PB": "Paraíba",
+    "PR": "Paraná",
+    "PE": "Pernambuco",
+    "PI": "Piauí",
+    "RJ": "Rio de Janeiro",
+    "RN": "Rio Grande do Norte",
+    "RS": "Rio Grande do Sul",
+    "RO": "Rondônia",
+    "RR": "Roraima",
+    "SC": "Santa Catarina",
+    "SP": "São Paulo",
+    "SE": "Sergipe",
+    "TO": "Tocantins",
 }
 
 INDICATOR_OPTIONS = [
@@ -40,9 +40,9 @@ INDICATOR_OPTIONS = [
 ]
 DELIMITER = ";"
 
-app = FastAPI()
+main = FastAPI()
 
-app.add_middleware(
+main.add_middleware(
     CORSMiddleware,
     # todo: poderia limitar ao localhost e um wildcard para *.herokuapp.com
     allow_origins=["*"],
@@ -52,24 +52,24 @@ app.add_middleware(
 )
 
 # Importando os dados
-file_path = 'data/f_comex.csv'
+file_path = "data/f_comex.csv"
 dataset = pd.read_csv(file_path, delimiter=DELIMITER)
 
 
-@app.get("/")
-def main():
+@main.get("/")
+def home():
     return RedirectResponse(url="/docs/")
 
 
-@app.get("/cod_ncm_listing/")
+@main.get("/cod_ncm_listing/")
 def cod_ncm_listing():
-    """ Listagem com os códigos de produto """
+    """Listagem com os códigos de produto"""
     return dataset["COD_NCM"].unique().tolist()
 
 
-@app.get("/oepration_statistics/{year}/{operation}/{cod_ncm}")
+@main.get("/oepration_statistics/{year}/{operation}/{cod_ncm}")
 def get_operation_statistics(year: int, operation: str, cod_ncm: int):
-    """ Obtém dados de movimentação """
+    """Obtém dados de movimentação"""
 
     filters = (
         (dataset["ANO"] == year)
@@ -83,10 +83,10 @@ def get_operation_statistics(year: int, operation: str, cod_ncm: int):
     return df.to_dict()
 
 
-@app.get("/via_statistics/{year}/{operation}/{cod_ncm}")
+@main.get("/via_statistics/{year}/{operation}/{cod_ncm}")
 def get_via_statistics(year: int, operation: str, cod_ncm: int):
-    """ Obtém dados de uso da via """
-    
+    """Obtém dados de uso da via"""
+
     filters = (
         (dataset["ANO"] == year)
         & (dataset["MOVIMENTACAO"] == operation)
@@ -108,7 +108,7 @@ def get_via_statistics(year: int, operation: str, cod_ncm: int):
     return count.to_dict()
 
 
-@app.get("/states_contribution/")
+@main.get("/states_contribution/")
 def get_states_contribution():
     """Caclula a contribuição percentual de cada estado
         para cada indicador

@@ -136,7 +136,9 @@ import_download_links.sort(key=lambda link: link.year, reverse=True)
 
 downloaded_dfs = []
 # Faz o donwload dos dados de exportação
-for i, link in enumerate(export_download_links[:N_FILES] + import_download_links[:N_FILES], start=1):
+for i, link in enumerate(
+    export_download_links[:N_FILES] + import_download_links[:N_FILES], start=1
+):
 
     # pasta mais nome de arquivo destino
     filename = DOWNLOAD_PATH + link.url.rsplit("/", 1)[-1]
@@ -162,9 +164,11 @@ for i, link in enumerate(export_download_links[:N_FILES] + import_download_links
 
     downloaded_dfs.append(df)
 
-    print(f'Arquivo finalizado {i}/{N_FILES*2}')
+    print(f"Arquivo finalizado {i}/{N_FILES*2}")
 
 
 # Une os arquivos
 final_df = pd.concat(downloaded_dfs)
-final_df.to_csv(DOWNLOAD_PATH + TARGET_FILENAME, sep=DELIMITER, encoding=ENCODING, index=False)
+final_df.to_csv(
+    DOWNLOAD_PATH + TARGET_FILENAME, sep=DELIMITER, encoding=ENCODING, index=False
+)
