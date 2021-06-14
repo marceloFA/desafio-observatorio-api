@@ -23,6 +23,7 @@ nome desta coluna deve ser MOVIMENTACAO.
 import csv
 from collections import namedtuple
 from glob import glob
+from os import path, makedirs
 import urllib.request
 import shutil
 import ssl
@@ -63,8 +64,8 @@ SIZE_COD_URF = 7
 SIZE_COD_SH4 = 4
 
 # cria o diretório que armarzena os dados
-if not os.path.exists(DOWNLOAD_PATH):
-     os.makedirs(DOWNLOAD_PATH)
+if not path.exists(DOWNLOAD_PATH):
+     makedirs(DOWNLOAD_PATH)
 
 DownloadLinks = namedtuple("DownloadLinks", ["type", "year", "url"])
 
