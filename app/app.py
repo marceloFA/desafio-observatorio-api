@@ -77,7 +77,7 @@ def cod_ncm_listing():
     return dataset["COD_NCM"].unique().tolist()
 
 
-@main.get("/oepration_statistics/{year}/{operation}/{cod_ncm}")
+@main.get("/operation_statistics/{year}/{operation}/{cod_ncm}")
 def get_operation_statistics(year: int, operation: str, cod_ncm: int):
     """Obtém dados de movimentação"""
 
