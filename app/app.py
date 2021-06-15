@@ -68,7 +68,7 @@ def home():
 def year_listing():
     """Listagem dos anos com dados disponíveis """
     years = dataset["ANO"].unique().tolist()
-    return sorted(years, reveresed=True)
+    return sorted(years, reverse=True)
 
 
 @main.get("/cod_ncm_listing/")
