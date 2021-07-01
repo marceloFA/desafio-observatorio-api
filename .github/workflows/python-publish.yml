@@ -24,5 +24,6 @@ jobs:
           gcp-cloud-storage-bucket: ${{ secrets.GCP_PROJECT_ID }}_cloudbuild
           gcp-gcr-region: us.gcr.io
           image-name: ${{ secrets.GCP_IMAGE_NAME }}
-          image-sources: app/
+          image-sources: Dockerfile
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
